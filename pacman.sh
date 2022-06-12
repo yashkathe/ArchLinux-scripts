@@ -6,6 +6,11 @@ GREEN='\033[0;32m'
 ORANGE='\033[0;33m'
 NC='\033[0m' # No Color
 
+#Text Formats
+BOLD=$(tput bold)
+ITALIC=$(tput sitm)
+NORMAL=$(tput sgr0)
+
 USERINPUT=100
 
 spinner() {
@@ -22,9 +27,26 @@ spinner() {
 checkSudo() {
     if [[ ${UID} -ne 0 ]]; then
         printf "${RED}ERROR ! start this script as root ${NC}\n"
-        printf "${RED}exiting now ...  ${NC}" 
+        printf "${RED}exiting now ...  ${NC}"
         sleep 0.5s &
         spinner
+        exit 1
+    fi
+}
+
+checkOrExit() {
+    echo
+    echo
+    echo -e "${BOLD}Press ENTER to perform additional tasks or type Q to Quit ${NORMAL}"
+    read CMOCUSERINPUT
+
+    if [[ $CMOCUSERINPUT == "q" || $CMOCUSERINPUT == "Q" ]]; then
+        echo "Nothing to do"
+        exit 0
+    elif [[ -z $CMOCUSERINPUT ]]; then
+        clear
+    else
+        printf "${RED}Invalid Option ${NC}\n"
         exit 1
     fi
 }
@@ -40,51 +62,70 @@ mainFunction() {
     5 => Uninstall a package
     6 => Uninstall unwanted packages
     Q => EXIT: 
+
     Enter an option: " USERINPUT
 
     case $USERINPUT in
     1)
-        printf "${GREEN}updating your system package list  ${NC}"
+        printf "${GREEN}${ITALIC}updating your system package list ${NORMAL}${NC}"
         sleep 1s &
         spinner
         sudo pacman -Syy
+        checkOrExit
         ;;
     2)
-        printf "${GREEN}updating and upgrading your system ${NC}"
+        printf "${GREEN}${ITALIC}updating and upgrading your system ${NORMAL}${NC}"
         sleep 1s &
         spinner
         sudo pacman -Syu
+        checkOrExit
         ;;
     3)
         read -p "Enter the name of the package you want to install: " PACKAGENAME
-        printf "${GREEN} Installing $PACKAGENAME ${NC}" &
+        printf "${GREEN}${ITALIC}Installing $PACKAGENAME ${NORMAL}${NC}" &
         sleep 1s &
         spinner
         sudo pacman -S $PACKAGENAME
+        checkOrExit
         ;;
     4)
-        printf "${GREEN}Listing all installed packages  ${NC}" &
+        printf "${GREEN}${ITALIC}Listing all installed packages ${NORMAL}${NC}" &
         sleep 1s &
         spinner
         sudo pacman -Qe
+        checkOrExit
         ;;
     5)
         read -p "Enter the name of the package you want to uninstall: " PACKAGENAME
-        printf "${RED} Uninstalling $PACKAGENAME ${NC}" 
+        printf "${RED}${ITALIC}Uninstalling $PACKAGENAME ${NORMAL}${NC}"
         sleep 1s &
         spinner
         sudo pacman -Rsc $PACKAGENAME
+        checkOrExit
         ;;
     6)
-        printf "${GREEN}Uninstalling unnecessary packages  ${NC}" 
+        printf "${GREEN}${ITALIC}Uninstalling unwanted packages ${NORMAL}${NC}"
         sleep 1s &
         spinner
         pacman -Rns $(pacman -Qdtq)
+        if [[ $? -ne 0 ]]; then
+            printf "${GREEN}No unwanted packages found ${NC}"
+        fi
+        checkOrExit
+        ;;
+    q)
+        echo
+        printf "${GREEN}Nothing to do ${NC}\n"
+        exit 0
+        ;;
+    Q)
+        echo
+        printf "${GREEN}Nothing to do ${NC}\n"
+        exit 0
         ;;
     *)
-        printf "${RED}Invalid option  ${NC}" 
-        sleep 0.3s &
-        spinner
+        printf "${RED}Invalid option ${NC}\n"
+        ;;
     esac
 }
 
