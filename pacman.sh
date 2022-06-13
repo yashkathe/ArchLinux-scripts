@@ -25,14 +25,15 @@ spinner() {
 }
 
 checkSudo() {
-    if [[ ${UID} -ne 0 ]]; then
-        printf "${RED}ERROR ! start this script as root ${NC}\n"
-        printf "${RED}exiting now ...  ${NC}"
-        sleep 0.5s &
-        spinner
+    if [[ ${UID} -eq 0 ]]; then
+        printf "Avoid running this script as root\n"
+        printf "Read More: ${ITALIC}${ORANGE} https://wiki.archlinux.org/index.php/Makepkg#Usage${NC}${NORMAL}\n"
+        printf "exiting now ...\n"
         exit 1
     fi
 }
+
+checkSudo
 
 checkOrExit() {
     echo
@@ -51,16 +52,16 @@ checkOrExit() {
     fi
 }
 
-checkSudo
-
 mainFunction() {
+    clear
     read -p "
     1 => Update your system package list
     2 => Update & Upgrade you system
     3 => Install a specific package 
     4 => List all installed local packages
-    5 => Uninstall a package
-    6 => Uninstall unwanted packages
+    5 => Search for a certain package
+    6 => Uninstall a package
+    7 => Uninstall unwanted packages
     Q => EXIT: 
 
     Enter an option: " USERINPUT
@@ -77,7 +78,16 @@ mainFunction() {
         printf "${GREEN}${ITALIC}updating and upgrading your system ${NORMAL}${NC}"
         sleep 1s &
         spinner
-        sudo pacman -Syu
+        which yay
+        if [[ $? -eq 0 ]]; then
+            printf "${ITALIC}Found yay installed ${NORMAL}\n"
+            echo "Updating AUR packages too"
+            yay -Syu 
+        else
+            printf "${ITALIC}yay not installed${NORMAL}\n"
+            echo "Perfoming normal system upgrade"
+            sudo pacman -Syu
+        fi
         checkOrExit
         ;;
     3)
@@ -96,6 +106,15 @@ mainFunction() {
         checkOrExit
         ;;
     5)
+        read -p "Search for a package: " PACKAGENAME
+        printf "${GREEN}${ITALIC}Searching for packages named $PACKAGENAME ${NORMAL}${NC}"
+        sleep 1s &
+        spinner
+        echo
+        sudo pacman -Qe | grep $PACKAGENAME
+        checkOrExit
+    ;;
+    6)
         read -p "Enter the name of the package you want to uninstall: " PACKAGENAME
         printf "${RED}${ITALIC}Uninstalling $PACKAGENAME ${NORMAL}${NC}"
         sleep 1s &
@@ -103,7 +122,7 @@ mainFunction() {
         sudo pacman -Rsc $PACKAGENAME
         checkOrExit
         ;;
-    6)
+    7)
         printf "${GREEN}${ITALIC}Uninstalling unwanted packages ${NORMAL}${NC}"
         sleep 1s &
         spinner
@@ -115,12 +134,12 @@ mainFunction() {
         ;;
     q)
         echo
-        printf "${GREEN}Nothing to do ${NC}\n"
+        echo "Nothing to do"
         exit 0
         ;;
     Q)
         echo
-        printf "${GREEN}Nothing to do ${NC}\n"
+        echo "Nothing to do"
         exit 0
         ;;
     *)
