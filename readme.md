@@ -1,4 +1,4 @@
-# Pacman Automation script + more
+# Pacman Automation script + Yay installation script
 
 ### Contents of this repository
 
