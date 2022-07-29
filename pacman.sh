@@ -128,7 +128,7 @@ mainFunction() {
         printf "${GREEN}${ITALIC}Uninstalling unwanted packages ${NORMAL}${NC}"
         sleep 0.5s &
         spinner
-        pacman -Rns $(pacman -Qdtq)
+        sudo pacman -Rns $(pacman -Qdtq)
         if [[ $? -ne 0 ]]; then
             printf "${GREEN}No unwanted packages found ${NC}"
         fi
