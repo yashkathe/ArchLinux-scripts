@@ -17,12 +17,6 @@
   wget https://raw.githubusercontent.com/yashkathe/ArchLinux-pacman-script/master/install-yay.sh
 ```
 
-### Sources:
-
-- https://devhints.io/pacman
-- https://www.youtube.com/watch?v=cBeSJvYkV7I&t=639s
-- https://www.youtube.com/watch?v=HD7jJEh4ZaM&t=557s
-
 ## Installing the script
 To install the pacman.sh script on your system
 ```bash
@@ -37,3 +31,9 @@ Now run the script as
 ```bash
 wholepacman
 ```
+
+### Sources:
+
+- https://devhints.io/pacman
+- https://www.youtube.com/watch?v=cBeSJvYkV7I&t=639s
+- https://www.youtube.com/watch?v=HD7jJEh4ZaM&t=557s
