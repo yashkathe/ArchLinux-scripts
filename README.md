@@ -22,3 +22,18 @@
 - https://devhints.io/pacman
 - https://www.youtube.com/watch?v=cBeSJvYkV7I&t=639s
 - https://www.youtube.com/watch?v=HD7jJEh4ZaM&t=557s
+
+## Installing the script
+To install the pacman.sh script on your system
+```bash
+wget https://raw.githubusercontent.com/yashkathe/ArchLinux-scripts/master/install.sh
+```
+After downloading the script run the install.sh script 
+```bash
+chmod +x install.sh
+./install.sh
+```
+Now run the script as 
+```bash
+wholepacman
+```
