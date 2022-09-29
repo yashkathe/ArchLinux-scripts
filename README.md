@@ -1,17 +1,17 @@
 # Pacman Automation script + Yay installation script
 
-### Contents of this repository
+## Contents of this repository
 
 - Pacman Automation script (pacman.sh)
 - Yay installation script (install-yay.sh)
 
-### Download the pacman automation script 
+## Download the pacman automation script 
 
 ```bash
   wget https://raw.githubusercontent.com/yashkathe/ArchLinux-pacman-script/master/pacman.sh
 ```
 
-### Download the yay installation script
+## Download the yay installation script
 
 ```bash
   wget https://raw.githubusercontent.com/yashkathe/ArchLinux-pacman-script/master/install-yay.sh
@@ -29,10 +29,10 @@ chmod +x install.sh
 ```
 Now run the script as 
 ```bash
-wholepacman
+ezpacman
 ```
 
-### Sources:
+## Sources:
 
 - https://devhints.io/pacman
 - https://www.youtube.com/watch?v=cBeSJvYkV7I&t=639s
