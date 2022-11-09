@@ -17,6 +17,13 @@ spinner() {
     echo
 }
 
+nonZeroExitFunction(){
+    if [[ $? -ne 0 ]]; then
+        echo $1
+        exit 1
+    fi
+}
+
 checkSudo() {
     if [[ ${UID} -eq 0 ]]; then
         printf "${RED}Dont run this script as root or sudo ${NC}\n"
@@ -31,17 +38,18 @@ checkSudo
 
 preReqPackages() {
     printf "${GREEN}Installing all the prerequisite packages ${NC}"
-    sleep 3s &
+    sleep 1s &
     spinner
 
     printf "${GREEN}Installing the base-devel package ${NC}"
-    sleep 1.5s &
+    sleep 1s &
     spinner
     sudo pacman -S base-devel
+    nonZeroExitFunction "Failed to install the base-devel package"
 
     #check for git
     printf "${GREEN}Checking if git is installed ${NC}"
-    sleep 1.5s &
+    sleep 1s &
     spinner
     command -v git
     if [[ $? -ne 0 ]]; then
@@ -49,21 +57,25 @@ preReqPackages() {
         sleep 1.5s &
         spinner
         sudo pacman -S git
+        nonZeroExitFunction "Failed to install git"
     fi
 }
 
 makePackage() {
     git clone https://aur.archlinux.org/yay.git
+    nonZeroExitFunction "Failed to clone the yay repository"
     cd ./yay
 
     printf "${GREEN}Building package ${NC}"
-    sleep 1.5s &
+    sleep 1s &
     spinner
 
     makepkg -s
+    nonZeroExitFunction "Failed to make package"
 
     FILENAME=$(basename *.tar.zst)
     sudo pacman -U $FILENAME
+    nonZeroExitFunction "Failed to upgrade package"
 }
 
 validateYay() {
