@@ -10,7 +10,7 @@
 
 1. Install the pacman.sh script on your system
 ```bash
-wget https://raw.githubusercontent.com/yashkathe/ArchLinux-scripts/master/install.sh
+wget https://raw.githubusercontent.com/yashkathe/ArchLinux-scripts/master/installation-script/install.sh
 ```
 2. After downloading the script run the install.sh script 
 ```bash
@@ -27,19 +27,19 @@ ezpacman
 - Download the pacman automation script 
 
 ```bash
-  wget https://raw.githubusercontent.com/yashkathe/ArchLinux-pacman-script/master/pacman.sh
+wget https://raw.githubusercontent.com/yashkathe/ArchLinux-scripts/master/scripts/pacman.sh
 ```
 
 - Download the yay installation script
 
 ```bash
-  wget https://raw.githubusercontent.com/yashkathe/ArchLinux-pacman-script/master/install-yay.sh
+wget https://raw.githubusercontent.com/yashkathe/ArchLinux-scripts/master/scripts/install-yay.sh  
 ```
 
 - Download the touchpad - taptoclick script
 
 ```bash
-  wget https://raw.githubusercontent.com/yashkathe/ArchLinux-pacman-script/master/touchpad-taptoclick.sh
+wget https://raw.githubusercontent.com/yashkathe/ArchLinux-scripts/master/scripts/touchpad-taptoclick.sh
 ```
 
 # Sources:
