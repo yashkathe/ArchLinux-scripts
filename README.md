@@ -6,41 +6,40 @@
 - Yay installation script (install-yay.sh)
 - Enable tap to click behavior for touchpad (touchpad-taptoclick.sh)
 
+# Installation
+
+1. Install the pacman.sh script on your system
+```bash
+wget https://raw.githubusercontent.com/yashkathe/ArchLinux-scripts/master/install.sh
+```
+2. After downloading the script run the install.sh script 
+```bash
+chmod +x install.sh
+./install.sh
+```
+3. Now run the script as 
+```bash
+ezpacman
+```
+
 # Download Links
 
-## Download the pacman automation script 
+- Download the pacman automation script 
 
 ```bash
   wget https://raw.githubusercontent.com/yashkathe/ArchLinux-pacman-script/master/pacman.sh
 ```
 
-## Download the yay installation script
+- Download the yay installation script
 
 ```bash
   wget https://raw.githubusercontent.com/yashkathe/ArchLinux-pacman-script/master/install-yay.sh
 ```
 
-## Download the touchpad - taptoclick script
+- Download the touchpad - taptoclick script
 
 ```bash
   wget https://raw.githubusercontent.com/yashkathe/ArchLinux-pacman-script/master/touchpad-taptoclick.sh
-```
-
-# Installation
-
-## Installing the pacman.sh script
-To install the pacman.sh script on your system
-```bash
-wget https://raw.githubusercontent.com/yashkathe/ArchLinux-scripts/master/install.sh
-```
-After downloading the script run the install.sh script 
-```bash
-chmod +x install.sh
-./install.sh
-```
-Now run the script as 
-```bash
-ezpacman
 ```
 
 # Sources:
